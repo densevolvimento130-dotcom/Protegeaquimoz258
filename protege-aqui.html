@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Protege Aqui – Segurança Total para Sua Casa e Empresa</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root{
+    --red:#D92B2B;
+    --red-dark:#B01E1E;
+    --orange:#FF6B00;
+    --orange-light:#FF8C35;
+    --white:#FFFFFF;
+    --off-white:#FFF8F5;
+    --gray-100:#F5F5F5;
+    --gray-200:#E8E8E8;
+    --gray-600:#666;
+    --gray-800:#222;
+    --black:#111;
+    --shadow:0 4px 24px rgba(0,0,0,.12);
+    --shadow-lg:0 8px 40px rgba(0,0,0,.18);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Nunito',sans-serif;color:var(--gray-800);background:#fff;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:'Rajdhani',sans-serif;letter-spacing:.5px}
+  a{text-decoration:none;color:inherit}
+
+  /* ── NAV ── */
+  nav{position:fixed;top:0;width:100%;z-index:1000;background:rgba(17,17,17,.96);backdrop-filter:blur(8px);padding:0 5%;display:flex;align-items:center;justify-content:space-between;height:68px;border-bottom:2px solid var(--red)}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Rajdhani',sans-serif;font-size:1.55rem;font-weight:700;color:#fff}
+  .logo-icon{width:38px;height:38px;background:linear-gradient(135deg,var(--red),var(--orange));border-radius:8px;display:grid;place-items:center;font-size:1.2rem}
+  .nav-links{display:flex;gap:28px;list-style:none}
+  .nav-links a{color:#ccc;font-size:.92rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:.2s}
+  .nav-links a:hover{color:var(--orange)}
+  .nav-cta{background:var(--red);color:#fff!important;padding:8px 20px;border-radius:6px;transition:.2s!important}
+  .nav-cta:hover{background:var(--orange)!important}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+  .hamburger span{width:26px;height:2px;background:#fff;border-radius:2px;transition:.3s}
+  .mobile-menu{display:none;position:fixed;top:68px;left:0;width:100%;background:#111;padding:20px 5%;z-index:999;border-top:1px solid #333}
+  .mobile-menu a{display:block;color:#ccc;padding:12px 0;font-size:1rem;font-weight:600;border-bottom:1px solid #222;text-transform:uppercase;letter-spacing:.5px}
+  .mobile-menu.open{display:block}
+
+  /* ── HERO ── */
+  #home{min-height:100vh;background:var(--black);position:relative;display:flex;align-items:center;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D92B2B' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+  .hero-gradient{position:absolute;inset:0;background:linear-gradient(120deg,rgba(217,43,43,.18) 0%,transparent 60%),linear-gradient(240deg,rgba(255,107,0,.12) 0%,transparent 60%)}
+  .hero-content{position:relative;z-index:2;padding:0 5%;max-width:680px;animation:fadeUp .8s ease both}
+  .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(217,43,43,.15);border:1px solid rgba(217,43,43,.4);color:var(--orange);font-size:.82rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:6px 14px;border-radius:20px;margin-bottom:28px}
+  .hero-badge::before{content:'🔒';font-size:1rem}
+  h1.hero-title{font-size:clamp(2.4rem,5vw,3.8rem);line-height:1.1;color:#fff;margin-bottom:20px}
+  h1.hero-title span{color:var(--orange)}
+  .hero-sub{font-size:1.08rem;color:#aaa;line-height:1.7;margin-bottom:36px;max-width:520px}
+  .hero-btns{display:flex;flex-wrap:wrap;gap:14px}
+  .btn-primary{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;padding:15px 32px;border-radius:8px;font-weight:800;font-size:1rem;letter-spacing:.5px;border:none;cursor:pointer;transition:.25s;box-shadow:0 4px 20px rgba(217,43,43,.4)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,107,0,.5)}
+  .btn-secondary{background:transparent;border:2px solid rgba(255,255,255,.25);color:#fff;padding:14px 28px;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:.25s}
+  .btn-secondary:hover{border-color:var(--orange);color:var(--orange)}
+  .hero-stats{display:flex;gap:40px;margin-top:60px}
+  .stat{color:#fff}
+  .stat-num{font-family:'Rajdhani',sans-serif;font-size:2rem;font-weight:700;color:var(--orange)}
+  .stat-label{font-size:.8rem;color:#888;text-transform:uppercase;letter-spacing:1px}
+  .hero-shield{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:340px;opacity:.12;font-size:280px;line-height:1;pointer-events:none;user-select:none}
+
+  /* ── SECTIONS COMMON ── */
+  section{padding:90px 5%}
+  .section-label{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--orange);margin-bottom:10px}
+  .section-title{font-size:clamp(1.8rem,3.5vw,2.8rem);color:var(--gray-800);margin-bottom:14px}
+  .section-title span{color:var(--red)}
+  .section-sub{color:var(--gray-600);line-height:1.7;max-width:540px}
+  .section-header{margin-bottom:56px}
+
+  /* ── TRUST BAR ── */
+  .trust-bar{background:var(--red);padding:18px 5%;display:flex;justify-content:center;flex-wrap:wrap;gap:36px}
+  .trust-item{display:flex;align-items:center;gap:10px;color:#fff;font-size:.88rem;font-weight:600}
+  .trust-item::before{font-size:1.2rem}
+
+  /* ── PRODUCTS ── */
+  #produtos{background:var(--off-white)}
+  .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:26px}
+  .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:var(--shadow);transition:.3s;border:1px solid var(--gray-200)}
+  .product-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .product-img{width:100%;height:180px;object-fit:cover;background:linear-gradient(135deg,#1a1a2e,#16213e);display:grid;place-items:center;font-size:4rem}
+  .product-body{padding:20px}
+  .product-tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:6px}
+  .product-name{font-family:'Rajdhani',sans-serif;font-size:1.3rem;font-weight:700;margin-bottom:8px}
+  .product-desc{font-size:.88rem;color:var(--gray-600);line-height:1.6;margin-bottom:16px}
+  .product-price{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;color:var(--red);margin-bottom:14px}
+  .btn-wa{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--red);color:#fff;padding:11px 20px;border-radius:8px;font-weight:700;font-size:.9rem;width:100%;transition:.2s;border:none;cursor:pointer}
+  .btn-wa:hover{background:var(--orange)}
+  .btn-wa svg{width:18px;height:18px;fill:#fff}
+
+  /* ── PACKAGES ── */
+  #pacotes{background:#fff}
+  .packages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:26px}
+  .pkg-card{border-radius:14px;padding:36px 28px;border:2px solid var(--gray-200);position:relative;transition:.3s;background:#fff}
+  .pkg-card.featured{border-color:var(--red);background:linear-gradient(160deg,#1a0000 0%,#2d0000 100%);color:#fff}
+  .pkg-card:hover:not(.featured){border-color:var(--orange)}
+  .pkg-badge{position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--red),var(--orange));color:#fff;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:1px;padding:5px 18px;border-radius:20px;white-space:nowrap}
+  .pkg-name{font-family:'Rajdhani',sans-serif;font-size:1.5rem;font-weight:700;margin-bottom:6px}
+  .pkg-price{font-family:'Rajdhani',sans-serif;font-size:2.4rem;font-weight:700;color:var(--red);margin:16px 0 4px}
+  .pkg-card.featured .pkg-price{color:var(--orange)}
+  .pkg-period{font-size:.8rem;color:var(--gray-600);margin-bottom:24px}
+  .pkg-card.featured .pkg-period{color:#aaa}
+  .pkg-features{list-style:none;margin-bottom:28px}
+  .pkg-features li{padding:8px 0;font-size:.92rem;border-bottom:1px solid rgba(0,0,0,.06);display:flex;align-items:center;gap:8px}
+  .pkg-card.featured .pkg-features li{border-color:rgba(255,255,255,.08);color:#ddd}
+  .pkg-features li::before{content:'✓';color:var(--orange);font-weight:800;font-size:.85rem}
+  .btn-pkg{display:block;text-align:center;padding:14px;border-radius:8px;font-weight:700;font-size:.95rem;transition:.25s;cursor:pointer;border:none}
+  .btn-pkg-outline{background:transparent;border:2px solid var(--red);color:var(--red)}
+  .btn-pkg-outline:hover{background:var(--red);color:#fff}
+  .btn-pkg-solid{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;box-shadow:0 4px 20px rgba(217,43,43,.35)}
+  .btn-pkg-solid:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,0,.45)}
+
+  /* ── WHY US ── */
+  #por-que-nos{background:var(--gray-800);color:#fff}
+  #por-que-nos .section-title{color:#fff}
+  .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:28px;margin-top:0}
+  .feature-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:28px 22px;transition:.3s}
+  .feature-card:hover{background:rgba(217,43,43,.1);border-color:rgba(217,43,43,.3)}
+  .feature-icon{font-size:2.2rem;margin-bottom:16px}
+  .feature-title{font-family:'Rajdhani',sans-serif;font-size:1.25rem;font-weight:700;margin-bottom:8px;color:#fff}
+  .feature-desc{font-size:.88rem;color:#aaa;line-height:1.6}
+
+  /* ── BUDGET FORM ── */
+  #orcamento{background:var(--off-white)}
+  .form-container{max-width:680px;background:#fff;border-radius:16px;padding:48px 44px;box-shadow:var(--shadow-lg);border-top:4px solid var(--red)}
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .form-group{display:flex;flex-direction:column;gap:7px}
+  .form-group.full{grid-column:1/-1}
+  .form-group label{font-size:.85rem;font-weight:700;color:var(--gray-800);text-transform:uppercase;letter-spacing:.5px}
+  .form-group input,.form-group select,.form-group textarea{border:2px solid var(--gray-200);border-radius:8px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:.95rem;color:var(--gray-800);outline:none;transition:.2s;background:#fff}
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{border-color:var(--red)}
+  .form-group textarea{resize:vertical;min-height:110px}
+  .btn-form{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;padding:16px 36px;border-radius:8px;font-weight:800;font-size:1.05rem;border:none;cursor:pointer;transition:.25s;box-shadow:0 4px 20px rgba(217,43,43,.35);width:100%;margin-top:8px}
+  .btn-form:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(255,107,0,.5)}
+  .form-note{font-size:.8rem;color:var(--gray-600);text-align:center;margin-top:10px}
+
+  /* ── CONTACT ── */
+  #contacto{background:var(--black);color:#fff;padding:70px 5%}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+  .contact-info h2{font-size:2rem;color:#fff;margin-bottom:16px}
+  .contact-info p{color:#aaa;line-height:1.7;margin-bottom:28px}
+  .contact-cards{display:flex;flex-direction:column;gap:14px}
+  .contact-card{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,.06);border-radius:10px;padding:16px 20px;border:1px solid rgba(255,255,255,.08)}
+  .contact-card-icon{font-size:1.6rem;width:44px;text-align:center}
+  .contact-card-info small{color:#888;font-size:.78rem;text-transform:uppercase;letter-spacing:.5px}
+  .contact-card-info span{display:block;color:#fff;font-weight:700;font-size:.95rem;margin-top:2px}
+  .map-placeholder{background:linear-gradient(135deg,#1a1a2e,#16213e);border-radius:14px;height:280px;display:grid;place-items:center;font-size:4rem;border:1px solid rgba(255,255,255,.08)}
+
+  /* ── FOOTER ── */
+  footer{background:#0a0a0a;padding:40px 5% 24px;border-top:1px solid #1a1a1a}
+  .footer-top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:32px;margin-bottom:36px}
+  .footer-logo{font-family:'Rajdhani',sans-serif;font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+  .footer-logo-icon{width:32px;height:32px;background:linear-gradient(135deg,var(--red),var(--orange));border-radius:6px;display:grid;place-items:center}
+  .footer-desc{color:#666;font-size:.88rem;max-width:260px;line-height:1.6}
+  .footer-links h4{color:#fff;font-family:'Rajdhani',sans-serif;font-size:1.1rem;margin-bottom:14px}
+  .footer-links ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .footer-links a{color:#666;font-size:.88rem;transition:.2s}
+  .footer-links a:hover{color:var(--orange)}
+  .footer-bottom{border-top:1px solid #1a1a1a;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  .footer-bottom p{color:#444;font-size:.8rem}
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float{position:fixed;bottom:28px;right:28px;z-index:999;width:58px;height:58px;background:#25D366;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.5);cursor:pointer;animation:pulse 2.5s infinite;transition:.3s}
+  .wa-float:hover{transform:scale(1.1)}
+  .wa-float svg{width:32px;height:32px;fill:#fff}
+  @keyframes pulse{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.5)}50%{box-shadow:0 4px 40px rgba(37,211,102,.8),0 0 0 8px rgba(37,211,102,.15)}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ── ADMIN PANEL ── */
+  #admin-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.8);backdrop-filter:blur(6px)}
+  #admin-overlay.open{display:flex;align-items:flex-start;overflow-y:auto;padding:20px}
+  .admin-panel{background:#fff;border-radius:16px;width:100%;max-width:900px;margin:auto;overflow:hidden;box-shadow:0 20px 80px rgba(0,0,0,.5)}
+  .admin-header{background:linear-gradient(135deg,var(--red),var(--orange));padding:22px 28px;display:flex;align-items:center;justify-content:space-between}
+  .admin-header h2{font-family:'Rajdhani',sans-serif;color:#fff;font-size:1.5rem}
+  .admin-close{background:rgba(255,255,255,.2);border:none;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.2rem;display:grid;place-items:center}
+  .admin-body{padding:28px}
+  .admin-tabs{display:flex;gap:8px;margin-bottom:28px;flex-wrap:wrap}
+  .admin-tab{padding:9px 18px;border-radius:8px;border:2px solid var(--gray-200);background:#fff;cursor:pointer;font-weight:700;font-size:.88rem;transition:.2s}
+  .admin-tab.active{background:var(--red);color:#fff;border-color:var(--red)}
+  .admin-section{display:none}
+  .admin-section.active{display:block}
+  .admin-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .admin-group{display:flex;flex-direction:column;gap:6px}
+  .admin-group.full{grid-column:1/-1}
+  .admin-group label{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-600)}
+  .admin-group input,.admin-group select,.admin-group textarea{border:2px solid var(--gray-200);border-radius:8px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:.9rem;outline:none;transition:.2s}
+  .admin-group input:focus,.admin-group select:focus,.admin-group textarea:focus{border-color:var(--red)}
+  .admin-group textarea{resize:vertical;min-height:80px}
+  .btn-admin{background:var(--red);color:#fff;padding:11px 24px;border-radius:8px;border:none;cursor:pointer;font-weight:700;font-size:.9rem;transition:.2s;margin-top:16px}
+  .btn-admin:hover{background:var(--orange)}
+  .products-table{width:100%;border-collapse:collapse;font-size:.88rem}
+  .products-table th{background:var(--gray-100);padding:10px 14px;text-align:left;font-weight:700;text-transform:uppercase;font-size:.78rem;letter-spacing:.5px;color:var(--gray-600)}
+  .products-table td{padding:12px 14px;border-bottom:1px solid var(--gray-200);vertical-align:middle}
+  .products-table tr:hover td{background:var(--off-white)}
+  .table-icon{font-size:1.5rem;text-align:center}
+  .action-btns{display:flex;gap:8px}
+  .btn-edit{background:var(--orange);color:#fff;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:700}
+  .btn-del{background:var(--red);color:#fff;border:none;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:.78rem;font-weight:700}
+  .admin-login{padding:48px;max-width:440px;margin:auto}
+  .admin-login h2{font-family:'Rajdhani',sans-serif;font-size:1.8rem;margin-bottom:24px;color:var(--gray-800)}
+  .login-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+  .login-group label{font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-600)}
+  .login-group input{border:2px solid var(--gray-200);border-radius:8px;padding:12px 16px;font-family:'Nunito',sans-serif;font-size:.95rem;outline:none;transition:.2s}
+  .login-group input:focus{border-color:var(--red)}
+  .login-error{color:var(--red);font-size:.85rem;margin-bottom:12px;display:none}
+  .success-toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);background:var(--gray-800);color:#fff;padding:12px 24px;border-radius:8px;font-size:.9rem;z-index:3000;opacity:0;transition:.3s;pointer-events:none;border-left:4px solid #25D366}
+  .success-toast.show{opacity:1}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:900px){
+    .contact-grid{grid-template-columns:1fr}
+    .map-placeholder{display:none}
+    .admin-form-grid{grid-template-columns:1fr}
+    .form-grid{grid-template-columns:1fr}
+  }
+  @media(max-width:700px){
+    .nav-links{display:none}
+    .hamburger{display:flex}
+    .hero-stats{gap:24px}
+    .form-container{padding:28px 20px}
+    .footer-top{flex-direction:column}
+    .hero-shield{display:none}
+    .btn-secondary{display:none}
+  }
+  @media(max-width:500px){
+    section{padding:60px 5%}
+    .hero-stats{flex-direction:column;gap:12px}
+    .trust-bar{gap:18px}
+    .packages-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🛡️</div>
+    Protege<span style="color:var(--orange)">Aqui</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#home">Início</a></li>
+    <li><a href="#produtos">Produtos</a></li>
+    <li><a href="#pacotes">Pacotes</a></li>
+    <li><a href="#por-que-nos">Porquê Nós</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+    <li><a href="#orcamento" class="nav-cta">Orçamento</a></li>
+  </ul>
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#home" onclick="toggleMenu()">Início</a>
+  <a href="#produtos" onclick="toggleMenu()">Produtos</a>
+  <a href="#pacotes" onclick="toggleMenu()">Pacotes</a>
+  <a href="#por-que-nos" onclick="toggleMenu()">Porquê Nós</a>
+  <a href="#contacto" onclick="toggleMenu()">Contacto</a>
+  <a href="#orcamento" onclick="toggleMenu()" style="color:var(--orange)">Pedir Orçamento</a>
+</div>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-content">
+    <div class="hero-badge">Líderes em Segurança</div>
+    <h1 class="hero-title">Protecção <span>completa</span> para a sua casa e empresa</h1>
+    <p class="hero-sub">Câmeras, alarmes, controle de acesso e sistemas inteligentes. Instalamos, configuramos e monitorizamos a sua segurança 24/7.</p>
+    <div class="hero-btns">
+      <a href="#orcamento"><button class="btn-primary">🛡️ Pedir Orçamento Grátis</button></a>
+      <a href="#produtos"><button class="btn-secondary">Ver Produtos</button></a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Clientes Protegidos</div></div>
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Anos no Mercado</div></div>
+      <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Suporte Técnico</div></div>
+    </div>
+  </div>
+  <div class="hero-shield" aria-hidden="true">🛡️</div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">✅ Instalação Profissional</div>
+  <div class="trust-item">🔧 Garantia de 12 Meses</div>
+  <div class="trust-item">📞 Suporte 24/7</div>
+  <div class="trust-item">🏆 Mais de 500 Clientes</div>
+  <div class="trust-item">💰 Melhor Preço Garantido</div>
+</div>
+
+<!-- PRODUCTS -->
+<section id="produtos">
+  <div class="section-header">
+    <div class="section-label">Os Nossos Produtos</div>
+    <h2 class="section-title">Soluções de <span>Segurança</span> Completas</h2>
+    <p class="section-sub">Equipamentos de alta qualidade para proteção residencial e empresarial, instalados por especialistas certificados.</p>
+  </div>
+  <div class="products-grid" id="productsGrid">
+    <!-- Products rendered by JS -->
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section id="pacotes">
+  <div class="section-header">
+    <div class="section-label">Pacotes Disponíveis</div>
+    <h2 class="section-title">Escolha o <span>Plano</span> Ideal</h2>
+    <p class="section-sub">Pacotes completos, pensados para cada tipo de necessidade e orçamento.</p>
+  </div>
+  <div class="packages-grid" id="packagesGrid">
+    <!-- Packages rendered by JS -->
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="por-que-nos">
+  <div class="section-header">
+    <div class="section-label">Porquê Nós</div>
+    <h2 class="section-title" style="color:#fff">A sua segurança é a nossa <span>prioridade</span></h2>
+    <p class="section-sub" style="color:#aaa">Somos especialistas com anos de experiência em instalações residenciais e empresariais em Moçambique.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🏅</div>
+      <div class="feature-title">Equipa Certificada</div>
+      <div class="feature-desc">Técnicos formados e certificados com anos de experiência no sector de segurança.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-title">Instalação Rápida</div>
+      <div class="feature-desc">Instalamos em até 24 horas após aprovação do orçamento, sem complicações.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔐</div>
+      <div class="feature-title">Sistemas Modernos</div>
+      <div class="feature-desc">Utilizamos tecnologia de ponta: câmeras 4K, alarmes inteligentes e acesso remoto.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Monitorização App</div>
+      <div class="feature-desc">Acompanhe tudo pelo smartphone, onde quer que esteja, em tempo real.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛠️</div>
+      <div class="feature-title">Manutenção Incluída</div>
+      <div class="feature-desc">Garantia de 12 meses com manutenção preventiva incluída em todos os pacotes.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💬</div>
+      <div class="feature-title">Suporte WhatsApp</div>
+      <div class="feature-desc">Resposta imediata via WhatsApp. Estamos disponíveis 7 dias por semana.</div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET FORM -->
+<section id="orcamento">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:auto" class="form-layout">
+    <div>
+      <div class="section-label">Orçamento Gratuito</div>
+      <h2 class="section-title">Solicite o seu <span>orçamento</span> agora</h2>
+      <p class="section-sub" style="margin-bottom:28px">Preencha o formulário e a nossa equipa entrará em contacto em menos de 2 horas. Sem compromisso.</p>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:12px">
+        <li style="display:flex;align-items:center;gap:10px;color:var(--gray-600);font-size:.9rem">✅ Avaliação no local totalmente gratuita</li>
+        <li style="display:flex;align-items:center;gap:10px;color:var(--gray-600);font-size:.9rem">✅ Sem taxa de visita técnica</li>
+        <li style="display:flex;align-items:center;gap:10px;color:var(--gray-600);font-size:.9rem">✅ Proposta personalizada em 24h</li>
+      </ul>
+    </div>
+    <div class="form-container">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Nome Completo</label>
+          <input type="text" id="fn" placeholder="O seu nome"/>
+        </div>
+        <div class="form-group">
+          <label>Telefone / WhatsApp</label>
+          <input type="tel" id="ft" placeholder="+258 8X XXX XXXX"/>
+        </div>
+        <div class="form-group full">
+          <label>Tipo de Serviço</label>
+          <select id="fs">
+            <option value="">Seleccione um serviço</option>
+            <option>Câmeras de Segurança CCTV</option>
+            <option>Sistema de Alarme</option>
+            <option>Controle de Acesso</option>
+            <option>Cerca Eléctrica</option>
+            <option>Segurança para Empresa</option>
+            <option>Kit de Segurança Residencial</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Mensagem</label>
+          <textarea id="fm" placeholder="Descreva a sua necessidade de segurança..."></textarea>
+        </div>
+      </div>
+      <button class="btn-form" onclick="sendBudget()">🛡️ Solicitar Orçamento Agora</button>
+      <p class="form-note">🔒 Os seus dados estão seguros. Não partilhamos informações.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label">Fale Connosco</div>
+      <h2>Entre em <span style="color:var(--orange)">Contacto</span></h2>
+      <p>A nossa equipa está pronta para responder às suas dúvidas e ajudar a encontrar a melhor solução de segurança para si.</p>
+      <div class="contact-cards">
+        <div class="contact-card">
+          <div class="contact-card-icon">📱</div>
+          <div class="contact-card-info">
+            <small>WhatsApp / Ligação</small>
+            <span>+258 85 851 0026</span>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📧</div>
+          <div class="contact-card-info">
+            <small>Email</small>
+            <span>desenvolvimento130@gmail.com</span>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">🕐</div>
+          <div class="contact-card-info">
+            <small>Horário de Atendimento</small>
+            <span>Segunda–Sábado: 7h – 19h</span>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon">📍</div>
+          <div class="contact-card-info">
+            <small>Localização</small>
+            <span>Maputo, Moçambique</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="map-placeholder">🗺️</div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">
+        <div class="footer-logo-icon">🛡️</div>
+        ProtegeAqui
+      </div>
+      <p class="footer-desc">Protecção total para a sua casa e empresa. Câmeras, alarmes e sistemas inteligentes desde 2016.</p>
+    </div>
+    <div class="footer-links">
+      <h4>Navegação</h4>
+      <ul>
+        <li><a href="#home">Início</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#pacotes">Pacotes</a></li>
+        <li><a href="#orcamento">Orçamento</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Produtos</h4>
+      <ul>
+        <li><a href="#produtos">Câmeras CCTV</a></li>
+        <li><a href="#produtos">Sistemas de Alarme</a></li>
+        <li><a href="#produtos">Controle de Acesso</a></li>
+        <li><a href="#produtos">Cerca Eléctrica</a></li>
+      </ul>
+    </div>
+    <div class="footer-links">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="https://wa.me/258858510026">WhatsApp</a></li>
+        <li><a href="mailto:desenvolvimento130@gmail.com">Email</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 ProtegeAqui. Todos os direitos reservados.</p>
+    <p style="color:#555;cursor:pointer" onclick="openAdmin()">⚙️ Área Admin</p>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://wa.me/258858510026?text=Olá%2C%20quero%20mais%20informações%20sobre%20a%20Protege%20Aqui" target="_blank" title="Fale connosco no WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- TOAST -->
+<div class="success-toast" id="toast">✅ Mensagem enviada com sucesso!</div>
+
+<!-- ADMIN OVERLAY -->
+<div id="admin-overlay">
+  <div class="admin-panel">
+    <div class="admin-header">
+      <h2>🛡️ Painel Administrativo</h2>
+      <button class="admin-close" onclick="closeAdmin()">✕</button>
+    </div>
+    <div id="adminContent"></div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const WA_NUM = '258858510026';
+const WA_MSG = encodeURIComponent('Olá, quero mais informações sobre a Protege Aqui');
+
+let products = JSON.parse(localStorage.getItem('protege_products') || 'null') || [
+  {id:1,name:'Kit Câmera CCTV 4 Canais',cat:'CCTV',icon:'📷',price:'Desde 8.500 MT',desc:'Sistema completo com 4 câmeras Full HD 1080p, DVR e acesso remoto via app. Inclui instalação.'},
+  {id:2,name:'Câmera IP WiFi Dome',cat:'CCTV',icon:'🎥',price:'Desde 3.200 MT',desc:'Câmera wireless com visão nocturna, detecção de movimento e gravação em nuvem.'},
+  {id:3,name:'Alarme GSM Residencial',cat:'Alarme',icon:'🚨',price:'Desde 5.500 MT',desc:'Alarme com sensor PIR, sirene 120dB, aviso por SMS e chamada. Fácil instalação.'},
+  {id:4,name:'Controle de Acesso Biométrico',cat:'Acesso',icon:'👆',price:'Desde 7.800 MT',desc:'Sistema biométrico + cartão RFID para entrada em escritórios e condomínios.'},
+  {id:5,name:'Cerca Eléctrica',cat:'Perimetral',icon:'⚡',price:'Desde 12.000 MT',desc:'Protecção perimetral profissional com energizador, sensores e aviso sonoro.'},
+  {id:6,name:'Kit Empresa Completo',cat:'Empresarial',icon:'🏢',price:'Desde 25.000 MT',desc:'Solução total: CCTV 8 canais + alarme + controle de acesso + monitorização.'},
+];
+
+let packages = JSON.parse(localStorage.getItem('protege_packages') || 'null') || [
+  {id:1,name:'Básico',price:'8.500',period:'instalação única',featured:false,features:['2 Câmeras HD','Gravação 7 dias','DVR 4 canais','App de monitorização','Instalação incluída','Garantia 6 meses']},
+  {id:2,name:'Profissional',price:'18.900',period:'instalação única',featured:true,features:['4 Câmeras Full HD','Gravação 30 dias','Alarme GSM incluído','Acesso remoto 24/7','Suporte prioritário','Garantia 12 meses','Manutenção trimestral']},
+  {id:3,name:'Premium',price:'35.000',period:'instalação única',featured:false,features:['8 Câmeras 4K','Gravação 90 dias','Alarme + Cerca Eléctrica','Controle de acesso','Monitorização 24/7','Garantia 24 meses','Manutenção mensal']},
+];
+
+function saveData(){
+  localStorage.setItem('protege_products',JSON.stringify(products));
+  localStorage.setItem('protege_packages',JSON.stringify(packages));
+}
+
+// ── RENDER PRODUCTS ──
+function renderProducts(){
+  const grid=document.getElementById('productsGrid');
+  grid.innerHTML=products.map(p=>`
+    <div class="product-card">
+      <div class="product-img">${p.icon}</div>
+      <div class="product-body">
+        <div class="product-tag">${p.cat}</div>
+        <div class="product-name">${p.name}</div>
+        <div class="product-desc">${p.desc}</div>
+        <div class="product-price">${p.price}</div>
+        <button class="btn-wa" onclick="waProduct('${p.name}')">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Pedir no WhatsApp
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER PACKAGES ──
+function renderPackages(){
+  const grid=document.getElementById('packagesGrid');
+  grid.innerHTML=packages.map(p=>`
+    <div class="pkg-card ${p.featured?'featured':''}">
+      ${p.featured?'<div class="pkg-badge">⭐ Mais Popular</div>':''}
+      <div class="pkg-name">${p.name}</div>
+      <div class="pkg-price">${p.price} MT</div>
+      <div class="pkg-period">${p.period}</div>
+      <ul class="pkg-features">
+        ${p.features.map(f=>`<li>${f}</li>`).join('')}
+      </ul>
+      <button class="${p.featured?'btn-pkg btn-pkg-solid':'btn-pkg btn-pkg-outline'}" onclick="waPkg('${p.name}')">
+        ${p.featured?'🔥 Contratar Agora':'Contratar Pacote'}
+      </button>
+    </div>
+  `).join('');
+}
+
+function waProduct(name){
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent('Olá! Quero informações sobre: '+name)}`, '_blank');
+}
+function waPkg(name){
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent('Olá! Quero contratar o Pacote '+name+' da Protege Aqui.')}`, '_blank');
+}
+
+// ── BUDGET FORM ──
+function sendBudget(){
+  const n=document.getElementById('fn').value.trim();
+  const t=document.getElementById('ft').value.trim();
+  const s=document.getElementById('fs').value;
+  const m=document.getElementById('fm').value.trim();
+  if(!n||!t||!s){alert('Por favor preencha nome, telefone e tipo de serviço.');return;}
+  const msg=`Olá! Gostaria de solicitar um orçamento.\n\n👤 Nome: ${n}\n📱 Telefone: ${t}\n🔧 Serviço: ${s}\n💬 Mensagem: ${m||'—'}`;
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`,'_blank');
+  showToast('✅ A redirecionar para o WhatsApp!');
+  document.getElementById('fn').value='';
+  document.getElementById('ft').value='';
+  document.getElementById('fs').value='';
+  document.getElementById('fm').value='';
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+// ── MOBILE MENU ──
+function toggleMenu(){
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// ── ADMIN ──
+let adminLoggedIn=false;
+const ADMIN_USER='admin';
+const ADMIN_PASS='protege2025';
+
+function openAdmin(){
+  document.getElementById('admin-overlay').classList.add('open');
+  if(adminLoggedIn) renderAdminPanel();
+  else renderLoginForm();
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+document.getElementById('admin-overlay').addEventListener('click',function(e){
+  if(e.target===this) closeAdmin();
+});
+
+function renderLoginForm(){
+  document.getElementById('adminContent').innerHTML=`
+    <div class="admin-login">
+      <h2>🔐 Área Administrativa</h2>
+      <div class="login-group">
+        <label>Utilizador</label>
+        <input type="text" id="lu" placeholder="admin"/>
+      </div>
+      <div class="login-group">
+        <label>Senha</label>
+        <input type="password" id="lp" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"/>
+      </div>
+      <p class="login-error" id="lerr">⚠️ Credenciais incorrectas.</p>
+      <button class="btn-admin" style="width:100%;margin-top:8px" onclick="doLogin()">Entrar</button>
+    </div>
+  `;
+}
+
+function doLogin(){
+  const u=document.getElementById('lu').value;
+  const p=document.getElementById('lp').value;
+  if(u===ADMIN_USER&&p===ADMIN_PASS){
+    adminLoggedIn=true;
+    renderAdminPanel();
+  } else {
+    document.getElementById('lerr').style.display='block';
+  }
+}
+
+function renderAdminPanel(){
+  document.getElementById('adminContent').innerHTML=`
+    <div class="admin-body">
+      <div class="admin-tabs">
+        <button class="admin-tab active" onclick="switchTab('products',this)">📦 Produtos</button>
+        <button class="admin-tab" onclick="switchTab('addProduct',this)">➕ Novo Produto</button>
+        <button class="admin-tab" onclick="switchTab('packages',this)">📋 Pacotes</button>
+        <button class="admin-tab" onclick="switchTab('addPackage',this)">➕ Novo Pacote</button>
+      </div>
+      <div id="tab-products" class="admin-section active">
+        ${renderProductsTable()}
+      </div>
+      <div id="tab-addProduct" class="admin-section">
+        ${renderAddProductForm()}
+      </div>
+      <div id="tab-packages" class="admin-section">
+        ${renderPackagesTable()}
+      </div>
+      <div id="tab-addPackage" class="admin-section">
+        ${renderAddPackageForm()}
+      </div>
+    </div>
+  `;
+}
+
+function switchTab(name,btn){
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function renderProductsTable(){
+  if(!products.length) return '<p style="color:#888;padding:20px 0">Nenhum produto cadastrado.</p>';
+  return `
+    <div style="overflow-x:auto">
+    <table class="products-table">
+      <thead><tr><th>Ícone</th><th>Nome</th><th>Categoria</th><th>Preço</th><th>Acções</th></tr></thead>
+      <tbody>
+        ${products.map(p=>`
+          <tr>
+            <td class="table-icon">${p.icon}</td>
+            <td><strong>${p.name}</strong><br><small style="color:#888">${p.desc.substring(0,50)}...</small></td>
+            <td><span style="background:var(--gray-100);padding:3px 10px;border-radius:20px;font-size:.78rem;font-weight:700">${p.cat}</span></td>
+            <td style="font-weight:700;color:var(--red)">${p.price}</td>
+            <td><div class="action-btns">
+              <button class="btn-edit" onclick="editProduct(${p.id})">✏️ Editar</button>
+              <button class="btn-del" onclick="deleteProduct(${p.id})">🗑️ Remover</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    </div>
+  `;
+}
+
+function renderAddProductForm(prod){
+  const p=prod||{id:'',name:'',cat:'CCTV',icon:'📷',price:'',desc:''};
+  return `
+    <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;margin-bottom:20px">${p.id?'✏️ Editar Produto':'➕ Adicionar Produto'}</h3>
+    <div class="admin-form-grid">
+      <div class="admin-group"><label>Nome do Produto</label><input id="pn" value="${p.name}" placeholder="Ex: Kit Câmera 4K"/></div>
+      <div class="admin-group"><label>Categoria</label>
+        <select id="pc">
+          ${['CCTV','Alarme','Acesso','Perimetral','Empresarial','Outro'].map(c=>`<option ${c===p.cat?'selected':''}>${c}</option>`).join('')}
+        </select>
+      </div>
+      <div class="admin-group"><label>Emoji / Ícone</label><input id="pi" value="${p.icon}" placeholder="📷"/></div>
+      <div class="admin-group"><label>Preço</label><input id="pp" value="${p.price}" placeholder="Desde 8.500 MT"/></div>
+      <div class="admin-group full"><label>Descrição</label><textarea id="pd">${p.desc}</textarea></div>
+    </div>
+    <input type="hidden" id="pid" value="${p.id}"/>
+    <button class="btn-admin" onclick="saveProduct()">${p.id?'💾 Guardar Alterações':'✅ Adicionar Produto'}</button>
+  `;
+}
+
+function renderPackagesTable(){
+  return `
+    <div style="overflow-x:auto">
+    <table class="products-table">
+      <thead><tr><th>Nome</th><th>Preço (MT)</th><th>Destaque</th><th>Benefícios</th><th>Acções</th></tr></thead>
+      <tbody>
+        ${packages.map(p=>`
+          <tr>
+            <td><strong>${p.name}</strong></td>
+            <td style="font-weight:700;color:var(--red)">${p.price} MT</td>
+            <td>${p.featured?'⭐ Sim':'—'}</td>
+            <td><small style="color:#888">${p.features.length} benefícios</small></td>
+            <td><div class="action-btns">
+              <button class="btn-edit" onclick="editPackage(${p.id})">✏️ Editar</button>
+              <button class="btn-del" onclick="deletePackage(${p.id})">🗑️ Remover</button>
+            </div></td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+    </div>
+  `;
+}
+
+function renderAddPackageForm(pkg){
+  const p=pkg||{id:'',name:'',price:'',period:'instalação única',featured:false,features:[]};
+  return `
+    <h3 style="font-family:'Rajdhani',sans-serif;font-size:1.3rem;margin-bottom:20px">${p.id?'✏️ Editar Pacote':'➕ Adicionar Pacote'}</h3>
+    <div class="admin-form-grid">
+      <div class="admin-group"><label>Nome do Pacote</label><input id="pkn" value="${p.name}" placeholder="Básico, Pro, Premium"/></div>
+      <div class="admin-group"><label>Preço (MT)</label><input id="pkp" value="${p.price}" placeholder="8500"/></div>
+      <div class="admin-group"><label>Período</label><input id="pkper" value="${p.period}" placeholder="instalação única"/></div>
+      <div class="admin-group"><label>Destaque?</label>
+        <select id="pkf"><option value="0" ${!p.featured?'selected':''}>Não</option><option value="1" ${p.featured?'selected':''}>Sim — Mais Popular</option></select>
+      </div>
+      <div class="admin-group full"><label>Benefícios (1 por linha)</label><textarea id="pkfeat" rows="6">${p.features.join('\n')}</textarea></div>
+    </div>
+    <input type="hidden" id="pkid" value="${p.id}"/>
+    <button class="btn-admin" onclick="savePackage()">${p.id?'💾 Guardar Alterações':'✅ Adicionar Pacote'}</button>
+  `;
+}
+
+function saveProduct(){
+  const id=document.getElementById('pid').value;
+  const obj={
+    id: id? parseInt(id) : Date.now(),
+    name:document.getElementById('pn').value.trim(),
+    cat:document.getElementById('pc').value,
+    icon:document.getElementById('pi').value.trim()||'🔒',
+    price:document.getElementById('pp').value.trim(),
+    desc:document.getElementById('pd').value.trim(),
+  };
+  if(!obj.name||!obj.price){alert('Preencha nome e preço.');return;}
+  if(id){
+    const idx=products.findIndex(p=>p.id===parseInt(id));
+    if(idx>=0) products[idx]=obj;
+  } else {
+    products.push(obj);
+  }
+  saveData();
+  renderProducts();
+  renderAdminPanel();
+  showToast('✅ Produto guardado com sucesso!');
+}
+
+function editProduct(id){
+  const p=products.find(x=>x.id===id);
+  if(!p) return;
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab')[1].classList.add('active');
+  document.getElementById('tab-addProduct').classList.add('active');
+  document.getElementById('tab-addProduct').innerHTML=renderAddProductForm(p);
+}
+
+function deleteProduct(id){
+  if(!confirm('Remover este produto?')) return;
+  products=products.filter(p=>p.id!==id);
+  saveData();
+  renderProducts();
+  renderAdminPanel();
+  showToast('🗑️ Produto removido.');
+}
+
+function savePackage(){
+  const id=document.getElementById('pkid').value;
+  const feats=document.getElementById('pkfeat').value.split('\n').map(f=>f.trim()).filter(Boolean);
+  const obj={
+    id: id? parseInt(id) : Date.now(),
+    name:document.getElementById('pkn').value.trim(),
+    price:document.getElementById('pkp').value.trim(),
+    period:document.getElementById('pkper').value.trim(),
+    featured:document.getElementById('pkf').value==='1',
+    features:feats,
+  };
+  if(!obj.name||!obj.price){alert('Preencha nome e preço.');return;}
+  if(id){
+    const idx=packages.findIndex(p=>p.id===parseInt(id));
+    if(idx>=0) packages[idx]=obj;
+  } else {
+    packages.push(obj);
+  }
+  saveData();
+  renderPackages();
+  renderAdminPanel();
+  showToast('✅ Pacote guardado com sucesso!');
+}
+
+function editPackage(id){
+  const p=packages.find(x=>x.id===id);
+  if(!p) return;
+  document.querySelectorAll('.admin-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.admin-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.admin-tab')[3].classList.add('active');
+  document.getElementById('tab-addPackage').classList.add('active');
+  document.getElementById('tab-addPackage').innerHTML=renderAddPackageForm(p);
+}
+
+function deletePackage(id){
+  if(!confirm('Remover este pacote?')) return;
+  packages=packages.filter(p=>p.id!==id);
+  saveData();
+  renderPackages();
+  renderAdminPanel();
+  showToast('🗑️ Pacote removido.');
+}
+
+// ── RESPONSIVE FORM LAYOUT ──
+function adjustFormLayout(){
+  const fl=document.querySelector('.form-layout');
+  if(!fl) return;
+  if(window.innerWidth<900){
+    fl.style.gridTemplateColumns='1fr';
+    fl.style.gap='36px';
+  } else {
+    fl.style.gridTemplateColumns='1fr 1fr';
+    fl.style.gap='60px';
+  }
+}
+window.addEventListener('resize',adjustFormLayout);
+
+// ── INIT ──
+renderProducts();
+renderPackages();
+adjustFormLayout();
+</script>
+</body>
+</html>
